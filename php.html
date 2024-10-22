@@ -1,0 +1,43 @@
+<?php
+// Simular el valor del sensor que te enviaría el ESP32
+$sensorValue = isset($_POST['sensor']) ? $_POST['sensor'] : '0';
+
+// Control de los LEDs
+$ledStatus = isset($_POST['leds']) ? $_POST['leds'] : '0000';
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Control de LEDs y Sensor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .led-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lectura del Sensor</h1>
+    <p>Valor del sensor: <strong><?php echo $sensorValue; ?></strong></p>
+
+    <h2>Control de LEDs</h2>
+    <form method="POST" action="recibir.php">
+        <label>LED 1</label>
+        <input type="checkbox" name="leds[0]" value="1" <?php if ($ledStatus[0] == '1') echo 'checked'; ?>>
+        <label>LED 2</label>
+        <input type="checkbox" name="leds[1]" value="1" <?php if ($ledStatus[1] == '1') echo 'checked'; ?>>
+        <label>LED 3</label>
+        <input type="checkbox" name="leds[2]" value="1" <?php if ($ledStatus[2] == '1') echo 'checked'; ?>>
+        <label>LED 4</label>
+        <input type="checkbox" name="leds[3]" value="1" <?php if ($ledStatus[3] == '1') echo 'checked'; ?>><br><br>
+
+        <button type="submit" class="led-button">Actualizar LEDs</button>
+    </form>
+</body>
+</html>
